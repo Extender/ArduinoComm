@@ -32,174 +32,188 @@ uint64_t text::uint64Pow(uint64_t base, uint64_t exp)
     return out;
 }
 
-char *text::mkstr(uint32_t length)
+char *text::mkstr(size_t length)
 {
     char *out=(char*)malloc(length+1); // Zero-terminator
     out[length]=0;
     return out;
 }
 
-wchar_t *text::mkwstr(text_t length)
+wchar_t *text::mkwstr(size_t length)
 {
     wchar_t *out=(wchar_t*)malloc((length+1)*sizeof(wchar_t)); // Zero-terminator
     out[length]=0;
     return out;
 }
 
-char *text::cloneString(char *in)
+char *text::duplicateString(const char *in)
 {
-    text_t len=strlen(in);
-    char *out=(char*)mkstr(len);
-    memcpy(out,in,len);
+    return strdup(in);
+}
+
+char *text::terminateFixedLengthString(const char *in, size_t length)
+{
+    char *newString=(char*)malloc(length+1);
+    memcpy(newString,in,length);
+    newString[length]=0;
+    return newString;
+}
+char *text::concat(const char *part1, const char *part2)
+{
+    size_t part1Len=strlen(part1);
+    size_t part2Len=strlen(part2);
+    char *out=mkstr(part1Len+part2Len);
+    memcpy(out,part1,part1Len);
+    memcpy(out+part1Len,part2,part2Len);
     return out;
 }
 
-char *text::concat(char *part1, char *part2)
+char *text::concat(const char *part1, const char *part2, const char *part3)
 {
-    text_t part1Len=strlen(part1);
-    char *out=mkstr(part1Len+strlen(part2));
-    strcpy(out,part1);
-    strcpy(out+part1Len,part2);
+    size_t part1Len=strlen(part1);
+    size_t part2Len=strlen(part2);
+    size_t part3Len=strlen(part3);
+    char *out=mkstr(part1Len+part2Len+part3Len);
+    memcpy(out,part1,part1Len);
+    memcpy(out+part1Len,part2,part2Len);
+    memcpy(out+part1Len+part2Len,part3,part3Len);
     return out;
 }
 
-char *text::concat(char *part1, char *part2, char *part3)
+char *text::concat(const char *part1, const char *part2, const char *part3, const char *part4)
 {
-    text_t part1Len=strlen(part1);
-    text_t part2Len=strlen(part2);
-    char *out=mkstr(part1Len+part2Len+strlen(part3));
-    strcpy(out,part1);
-    strcpy(out+part1Len,part2);
-    strcpy(out+part1Len+part2Len,part3);
+    size_t part1Len=strlen(part1);
+    size_t part2Len=strlen(part2);
+    size_t part3Len=strlen(part3);
+    size_t part4Len=strlen(part4);
+    char *out=mkstr(part1Len+part2Len+part3Len+part4Len);
+    memcpy(out,part1,part1Len);
+    memcpy(out+part1Len,part2,part2Len);
+    memcpy(out+part1Len+part2Len,part3,part3Len);
+    memcpy(out+part1Len+part2Len+part3Len,part4,part4Len);
     return out;
 }
 
-char *text::concat(char *part1, char *part2, char *part3, char *part4)
+char *text::concat(const char *part1, const char *part2, const char *part3, const char *part4, const char *part5)
 {
-    text_t part1Len=strlen(part1);
-    text_t part2Len=strlen(part2);
-    text_t part3Len=strlen(part3);
-    char *out=mkstr(part1Len+part2Len+part3Len+strlen(part4));
-    strcpy(out,part1);
-    strcpy(out+part1Len,part2);
-    strcpy(out+part1Len+part2Len,part3);
-    strcpy(out+part1Len+part2Len+part3Len,part4);
+    size_t part1Len=strlen(part1);
+    size_t part2Len=strlen(part2);
+    size_t part3Len=strlen(part3);
+    size_t part4Len=strlen(part4);
+    size_t part5Len=strlen(part5);
+    char *out=mkstr(part1Len+part2Len+part3Len+part4Len+part5Len);
+    memcpy(out,part1,part1Len);
+    memcpy(out+part1Len,part2,part2Len);
+    memcpy(out+part1Len+part2Len,part3,part3Len);
+    memcpy(out+part1Len+part2Len+part3Len,part4,part4Len);
+    memcpy(out+part1Len+part2Len+part3Len+part4Len,part5,part5Len);
     return out;
 }
 
-char *text::concat(char *part1, char *part2, char *part3, char *part4, char *part5)
+char *text::concat(const char *part1, const char *part2, const char *part3, const char *part4, const char *part5, const char *part6)
 {
-    text_t part1Len=strlen(part1);
-    text_t part2Len=strlen(part2);
-    text_t part3Len=strlen(part3);
-    text_t part4Len=strlen(part4);
-    char *out=mkstr(part1Len+part2Len+part3Len+part4Len+strlen(part5));
-    strcpy(out,part1);
-    strcpy(out+part1Len,part2);
-    strcpy(out+part1Len+part2Len,part3);
-    strcpy(out+part1Len+part2Len+part3Len,part4);
-    strcpy(out+part1Len+part2Len+part3Len+part4Len,part5);
+    size_t part1Len=strlen(part1);
+    size_t part2Len=strlen(part2);
+    size_t part3Len=strlen(part3);
+    size_t part4Len=strlen(part4);
+    size_t part5Len=strlen(part5);
+    size_t part6Len=strlen(part6);
+    char *out=mkstr(part1Len+part2Len+part3Len+part4Len+part5Len+part6Len);
+    memcpy(out,part1,part1Len);
+    memcpy(out+part1Len,part2,part2Len);
+    memcpy(out+part1Len+part2Len,part3,part3Len);
+    memcpy(out+part1Len+part2Len+part3Len,part4,part4Len);
+    memcpy(out+part1Len+part2Len+part3Len+part4Len,part5,part5Len);
+    memcpy(out+part1Len+part2Len+part3Len+part4Len+part5Len,part6,part6Len);
     return out;
 }
 
-char *text::concat(char *part1, char *part2, char *part3, char *part4, char *part5, char *part6)
+char *text::concat(const char *part1, const char *part2, const char *part3, const char *part4, const char *part5, const char *part6, const char *part7)
 {
-    text_t part1Len=strlen(part1);
-    text_t part2Len=strlen(part2);
-    text_t part3Len=strlen(part3);
-    text_t part4Len=strlen(part4);
-    text_t part5Len=strlen(part5);
-    char *out=mkstr(part1Len+part2Len+part3Len+part4Len+part5Len+strlen(part6));
-    strcpy(out,part1);
-    strcpy(out+part1Len,part2);
-    strcpy(out+part1Len+part2Len,part3);
-    strcpy(out+part1Len+part2Len+part3Len,part4);
-    strcpy(out+part1Len+part2Len+part3Len+part4Len,part5);
-    strcpy(out+part1Len+part2Len+part3Len+part4Len+part5Len,part6);
+    size_t part1Len=strlen(part1);
+    size_t part2Len=strlen(part2);
+    size_t part3Len=strlen(part3);
+    size_t part4Len=strlen(part4);
+    size_t part5Len=strlen(part5);
+    size_t part6Len=strlen(part6);
+    size_t part7Len=strlen(part7);
+    char *out=mkstr(part1Len+part2Len+part3Len+part4Len+part5Len+part6Len+part7Len);
+    memcpy(out,part1,part1Len);
+    memcpy(out+part1Len,part2,part2Len);
+    memcpy(out+part1Len+part2Len,part3,part3Len);
+    memcpy(out+part1Len+part2Len+part3Len,part4,part4Len);
+    memcpy(out+part1Len+part2Len+part3Len+part4Len,part5,part5Len);
+    memcpy(out+part1Len+part2Len+part3Len+part4Len+part5Len,part6,part6Len);
+    memcpy(out+part1Len+part2Len+part3Len+part4Len+part5Len+part6Len,part7,part7Len);
     return out;
 }
 
-char *text::concat(char *part1, char *part2, char *part3, char *part4, char *part5, char *part6, char *part7)
+char *text::concat(const char *part1, const char *part2, const char *part3, const char *part4, const char *part5, const char *part6, const char *part7, const char *part8)
 {
-    text_t part1Len=strlen(part1);
-    text_t part2Len=strlen(part2);
-    text_t part3Len=strlen(part3);
-    text_t part4Len=strlen(part4);
-    text_t part5Len=strlen(part5);
-    text_t part6Len=strlen(part6);
-    char *out=mkstr(part1Len+part2Len+part3Len+part4Len+part5Len+part6Len+strlen(part7));
-    strcpy(out,part1);
-    strcpy(out+part1Len,part2);
-    strcpy(out+part1Len+part2Len,part3);
-    strcpy(out+part1Len+part2Len+part3Len,part4);
-    strcpy(out+part1Len+part2Len+part3Len+part4Len,part5);
-    strcpy(out+part1Len+part2Len+part3Len+part4Len+part5Len,part6);
-    strcpy(out+part1Len+part2Len+part3Len+part4Len+part5Len+part6Len,part7);
+    size_t part1Len=strlen(part1);
+    size_t part2Len=strlen(part2);
+    size_t part3Len=strlen(part3);
+    size_t part4Len=strlen(part4);
+    size_t part5Len=strlen(part5);
+    size_t part6Len=strlen(part6);
+    size_t part7Len=strlen(part7);
+    size_t part8Len=strlen(part8);
+    char *out=mkstr(part1Len+part2Len+part3Len+part4Len+part5Len+part6Len+part7Len+part8Len);
+    memcpy(out,part1,part1Len);
+    memcpy(out+part1Len,part2,part2Len);
+    memcpy(out+part1Len+part2Len,part3,part3Len);
+    memcpy(out+part1Len+part2Len+part3Len,part4,part4Len);
+    memcpy(out+part1Len+part2Len+part3Len+part4Len,part5,part5Len);
+    memcpy(out+part1Len+part2Len+part3Len+part4Len+part5Len,part6,part6Len);
+    memcpy(out+part1Len+part2Len+part3Len+part4Len+part5Len+part6Len,part7,part7Len);
+    memcpy(out+part1Len+part2Len+part3Len+part4Len+part5Len+part6Len+part7Len,part8,part8Len);
     return out;
 }
 
-char *text::concat(char *part1, char *part2, char *part3, char *part4, char *part5, char *part6, char *part7, char *part8)
+wchar_t *text::concatWideString(const wchar_t *part1, const wchar_t *part2)
 {
-    text_t part1Len=strlen(part1);
-    text_t part2Len=strlen(part2);
-    text_t part3Len=strlen(part3);
-    text_t part4Len=strlen(part4);
-    text_t part5Len=strlen(part5);
-    text_t part6Len=strlen(part6);
-    text_t part7Len=strlen(part7);
-    char *out=mkstr(part1Len+part2Len+part3Len+part4Len+part5Len+part6Len+part7Len+strlen(part8));
-    strcpy(out,part1);
-    strcpy(out+part1Len,part2);
-    strcpy(out+part1Len+part2Len,part3);
-    strcpy(out+part1Len+part2Len+part3Len,part4);
-    strcpy(out+part1Len+part2Len+part3Len+part4Len,part5);
-    strcpy(out+part1Len+part2Len+part3Len+part4Len+part5Len,part6);
-    strcpy(out+part1Len+part2Len+part3Len+part4Len+part5Len+part6Len,part7);
-    strcpy(out+part1Len+part2Len+part3Len+part4Len+part5Len+part6Len+part7Len,part8);
+    size_t part1Len=wcslen(part1);
+    size_t part2Len=wcslen(part2);
+    wchar_t *out=(wchar_t*)mkwstr(part1Len+part2Len);
+    wmemcpy(out,part1,part1Len);
+    wmemcpy(out+part1Len,part2,part2Len);
     return out;
 }
 
-wchar_t *text::concatWideString(wchar_t *part1, wchar_t *part2)
+wchar_t *text::concatWideString(const wchar_t *part1, const wchar_t *part2, const wchar_t *part3)
 {
-    text_t part1Len=wcslen(part1);
-    wchar_t *out=(wchar_t*)mkwstr(part1Len+wcslen(part2));
-    wcscpy(out,part1);
-    wcscpy(out+part1Len,part2);
+    size_t part1Len=wcslen(part1);
+    size_t part2Len=wcslen(part2);
+    size_t part3Len=wcslen(part3);
+    wchar_t *out=(wchar_t*)mkwstr(part1Len+part2Len+part3Len);
+    wmemcpy(out,part1,part1Len);
+    wmemcpy(out+part1Len,part2,part2Len);
+    wmemcpy(out+part1Len+part2Len,part3,part3Len);
     return out;
 }
 
-wchar_t *text::concatWideString(wchar_t *part1, wchar_t *part2, wchar_t *part3)
+wchar_t *text::concatWideString(const wchar_t *part1, const wchar_t *part2, const wchar_t *part3, const wchar_t *part4)
 {
-    text_t part1Len=wcslen(part1);
-    text_t part2Len=wcslen(part2);
-    wchar_t *out=(wchar_t*)mkwstr(part1Len+part2Len+wcslen(part3));
-    wcscpy(out,part1);
-    wcscpy(out+part1Len,part2);
-    wcscpy(out+part1Len+part2Len,part3);
+    size_t part1Len=wcslen(part1);
+    size_t part2Len=wcslen(part2);
+    size_t part3Len=wcslen(part3);
+    size_t part4Len=wcslen(part4);
+    wchar_t *out=(wchar_t*)mkwstr(part1Len+part2Len+part3Len+part4Len);
+    wmemcpy(out,part1,part1Len);
+    wmemcpy(out+part1Len,part2,part2Len);
+    wmemcpy(out+part1Len+part2Len,part3,part3Len);
+    wmemcpy(out+part1Len+part2Len+part3Len,part4,part4Len);
     return out;
 }
 
-wchar_t *text::concatWideString(wchar_t *part1, wchar_t *part2, wchar_t *part3, wchar_t *part4)
-{
-    text_t part1Len=wcslen(part1);
-    text_t part2Len=wcslen(part2);
-    text_t part3Len=wcslen(part3);
-    wchar_t *out=(wchar_t*)mkwstr(part1Len+part2Len+part3Len+wcslen(part4));
-    wcscpy(out,part1);
-    wcscpy(out+part1Len,part2);
-    wcscpy(out+part1Len+part2Len,part3);
-    wcscpy(out+part1Len+part2Len+part3Len,part4);
-    return out;
-}
-
-char *text::concatPaths(char *part1, char *part2)
+char *text::concatPaths(const char *part1, const char *part2)
 {
     if(part1[0]=='\\')
         part1++;
     return concat(part1,part1[strlen(part1)-1]=='\\'?"":"\\",part2);
 }
 
-char *text::concatPaths(char *part1, char *part2, char *part3)
+char *text::concatPaths(const char *part1, const char *part2, const char *part3)
 {
     if(part1[0]=='\\')
         part1++;
@@ -208,7 +222,7 @@ char *text::concatPaths(char *part1, char *part2, char *part3)
     return concat(part1,part1[strlen(part1)-1]=='\\'?"":"\\",part2,part2[strlen(part2)-1]=='\\'?"":"\\",part3);
 }
 
-char *text::concatPaths(char *part1, char *part2, char *part3, char *part4)
+char *text::concatPaths(const char *part1, const char *part2, const char *part3, const char *part4)
 {
     if(part1[0]=='\\')
         part1++;
@@ -221,7 +235,7 @@ char *text::concatPaths(char *part1, char *part2, char *part3, char *part4)
     return concat(part1,part1[strlen(part1)-1]=='\\'?"":"\\",part2,part2[strlen(part2)-1]=='\\'?"":"\\",part3,part3[strlen(part3)-1]=='\\'?"":"\\",part4);
 }
 
-char *text::concatPaths(char *part1, char *part2, char *part3, char *part4, char *part5)
+char *text::concatPaths(const char *part1, const char *part2, const char *part3, const char *part4, const char *part5)
 {
     if(part1[0]=='\\')
         part1++;
@@ -236,7 +250,7 @@ char *text::concatPaths(char *part1, char *part2, char *part3, char *part4, char
     return concat(part1,part1[strlen(part1)-1]=='\\'?"":"\\",part2,part2[strlen(part2)-1]=='\\'?"":"\\",part3,part3[strlen(part3)-1]=='\\'?"":"\\",part4,text::concat(part4[strlen(part4)-1]=='\\'?"":"\\",part5));
 }
 
-char *text::concatPaths(char *part1, char *part2, char *part3, char *part4, char *part5, char *part6)
+char *text::concatPaths(const char *part1, const char *part2, const char *part3, const char *part4, const char *part5, const char *part6)
 {
     if(part1[0]=='\\')
         part1++;
@@ -253,7 +267,7 @@ char *text::concatPaths(char *part1, char *part2, char *part3, char *part4, char
     return concat(part1,part1[strlen(part1)-1]=='\\'?"":"\\",part2,part2[strlen(part2)-1]=='\\'?"":"\\",part3,part3[strlen(part3)-1]=='\\'?"":"\\",part4,text::concat(part4[strlen(part4)-1]=='\\'?"":"\\",part5,part5[strlen(part5)-1]=='\\'?"":"\\",part6));
 }
 
-char *text::concatPaths(char *part1, char *part2, char *part3, char *part4, char *part5, char *part6, char *part7)
+char *text::concatPaths(const char *part1, const char *part2, const char *part3, const char *part4, const char *part5, const char *part6, const char *part7)
 {
     if(part1[0]=='\\')
         part1++;
@@ -272,7 +286,7 @@ char *text::concatPaths(char *part1, char *part2, char *part3, char *part4, char
     return concat(part1,part1[strlen(part1)-1]=='\\'?"":"\\",part2,part2[strlen(part2)-1]=='\\'?"":"\\",part3,part3[strlen(part3)-1]=='\\'?"":"\\",text::concat(part4,part4[strlen(part4)-1]=='\\'?"":"\\",part5,part5[strlen(part5)-1]=='\\'?"":"\\",part6,part6[strlen(part6)-1]=='\\'?"":"\\",part7));
 }
 
-char *text::concatPaths(char *part1, char *part2, char *part3, char *part4, char *part5, char *part6, char *part7, char *part8)
+char *text::concatPaths(const char *part1, const char *part2, const char *part3, const char *part4, const char *part5, const char *part6, const char *part7, const char *part8)
 {
     if(part1[0]=='\\')
         part1++;
@@ -295,52 +309,206 @@ char *text::concatPaths(char *part1, char *part2, char *part3, char *part4, char
 
 char *text::toString(int32_t in)
 {
-    /*bool n=in<0;
-    if(n)
-        in=-in;
-    text_t len=in==0?1:(int)ceil((double)log((double)in));
-    char *out=mkstr(len+(n?1:0));
-    itoa(in*(n?-1:1),out,10);
-    return out;*/
+    return intToString(in);
+}
 
+char *text::toString(int64_t in)
+{
+    return longToString(in);
+}
+
+char *text::toString(uint32_t in)
+{
+    return unsignedIntToString(in);
+}
+
+char *text::toString(uint64_t in)
+{
+    return unsignedLongToString(in);
+}
+
+char *text::toString(double in)
+{
+    return doubleToString(in);
+}
+
+char *text::toString(double in, uint8_t precision)
+{
+    return doubleToStringWithFixedPrecision(in,precision);
+}
+
+char *text::intToString(int32_t in)
+{
     if(in<0)
-        return text::concat("-",unsignedIntToString(-in));
+    {
+        char *u=unsignedIntToString(-in);
+        char *ret=text::concat("-",u);
+        free(u);
+        return ret;
+    }
     return unsignedIntToString(in);
 }
 
 char *text::longToString(int64_t in)
 {
     if(in<0)
-        return text::concat("-",unsignedLongToString(-in));
+    {
+        char *u=unsignedLongToString(-in);
+        char *ret=text::concat("-",u);
+        free(u);
+        return ret;
+    }
     return unsignedLongToString(in);
 }
 
 char *text::doubleToString(double in) // Warning: precision loss (inavoidable)
 {
-    std::ostringstream strm;
-    strm<<in;
-    std::string str=strm.str();
-    char *out=(char*)calloc(32,1);
-    memcpy(out,str.c_str(),str.length());
+    // Modify doubleToStringWithFixedPrecision, too.
+    double i,f;
+    f=modf(in,&i);
+    bool negative=in<0.0;
+    // This works both when i is negative and when f is negative (both can be negative).
+    if(f<0.0)
+        f*=-1.0;
+    if(i<0.0)
+        i*=-1.0;
+    char *iStr=unsignedLongToString((uint64_t)i);
+    char *fStr=unsignedLongToString(roundl((f*pow((double)10,15))/10.0)); // Precision loss inavoidable.
+    int iStrLen=strlen(iStr);
+    int fStrLen=strlen(fStr);
+    uint8_t emptyDecimals=f==0.0?0:(uint8_t)((double)(floor(log10((double)f))+1)*-1.0);
+    if(emptyDecimals>0)
+    {
+        // Prepend empty decimals
+        char *zeroString=mkstr(emptyDecimals);
+        memset(zeroString,'0',emptyDecimals);
+        char *nStr=concat(zeroString,fStr);
+        free(fStr);
+        fStr=nStr;
+        fStrLen+=emptyDecimals;
+        free(zeroString);
+    }
+    while(fStr[fStrLen-1]=='0'&&fStrLen>1)
+        fStrLen--;
+    if(negative)
+    {
+        char *out=(char*)malloc(iStrLen+fStrLen+3+emptyDecimals); // Zero-terminator, "-" and "."
+        out[0]='-';
+        memcpy(out+1,iStr,iStrLen);
+        out[iStrLen+1]='.';
+        memcpy(out+iStrLen+2,fStr,fStrLen);
+        out[iStrLen+fStrLen+2]=0;
+        free(fStr);
+        free(iStr);
+        return out;
+    }
+    char *out=(char*)malloc(iStrLen+fStrLen+2+emptyDecimals); // Zero-terminator and "."
+    memcpy(out,iStr,iStrLen);
+    out[iStrLen]='.';
+    memcpy(out+iStrLen+1,fStr,fStrLen);
+    out[iStrLen+fStrLen+1]=0;
+    free(fStr);
+    free(iStr);
+    return out;
+}
+
+char *text::doubleToStringWithFixedPrecision(double in, uint8_t precision)
+{
+    // Modify doubleToString, too.
+    double i,f;
+    f=modf(in,&i);
+    bool negative=in<0.0;
+    // This works both when i is negative and when f is negative (both can be negative).
+    if(f<0.0)
+        f*=-1.0;
+    if(i<0.0)
+        i*=-1.0;
+    char *iStr=unsignedLongToString((uint64_t)i);
+    if(precision==0)
+        return iStr;
+    char *fStr=unsignedLongToString(roundl((f*pow((double)10,precision+1))/10.0)); // Precision loss inavoidable.
+    int iStrLen=strlen(iStr);
+    int fStrLen=strlen(fStr);
+    uint8_t emptyDecimals;
+    if(f==0.0)
+    {
+        emptyDecimals=0;
+        char *azStr=mkstr(precision);
+        memset(azStr,'0',precision);
+        free(fStr);
+        fStr=azStr;
+        fStrLen=precision;
+    }
+    else
+    {
+        emptyDecimals=(uint8_t)((double)(floor(log10((double)f))+1)*-1.0);
+        if(emptyDecimals>0)
+        {
+            // Prepend empty decimals
+            fStrLen+=emptyDecimals;
+            bool appendZeros=fStrLen<precision;
+            int zerosToAppend=precision-fStrLen;
+            char *zeroString=mkstr(emptyDecimals);
+            memset(zeroString,'0',emptyDecimals);
+            char *nStr;
+            if(appendZeros)
+            {
+                char *azStr=mkstr(zerosToAppend);
+                memset(azStr,'0',zerosToAppend);
+                nStr=concat(zeroString,fStr,azStr);
+                free(azStr);
+                fStrLen+=zerosToAppend;
+            }
+            else
+                nStr=concat(zeroString,fStr);
+            free(fStr);
+            fStr=nStr;
+            free(zeroString);
+        }
+        while(fStr[fStrLen-1]=='0'&&fStrLen>(precision>1?precision:1))
+            fStrLen--;
+    }
+    if(negative)
+    {
+        char *out=(char*)malloc(iStrLen+fStrLen+3+emptyDecimals); // Zero-terminator, "-" and "."
+        out[0]='-';
+        memcpy(out+1,iStr,iStrLen);
+        out[iStrLen+1]='.';
+        memcpy(out+iStrLen+2,fStr,fStrLen);
+        out[iStrLen+fStrLen+2]=0;
+        free(fStr);
+        free(iStr);
+        return out;
+    }
+    char *out=(char*)malloc(iStrLen+fStrLen+2+emptyDecimals); // Zero-terminator and "."
+    memcpy(out,iStr,iStrLen);
+    out[iStrLen]='.';
+    memcpy(out+iStrLen+1,fStr,fStrLen);
+    out[iStrLen+fStrLen+1]=0;
+    free(fStr);
+    free(iStr);
     return out;
 }
 
 char *text::unsignedIntToString(uint32_t in)
 {
     char *out=(char*)calloc(11,1); // 10+1
-    uint32_t *temp=(uint32_t*)calloc(sizeof(uint32_t)*8,sizeof(uint32_t)); // Retrieve a single value for each position.
+    uint32_t *temp=(uint32_t*)calloc(11,sizeof(uint32_t)); // Retrieve a single value for each position.
     temp[0]=in;
-    for(char i=0;i<32;i++)
+    for(uint8_t i=0;i<9;i++) // Amount of decimals in highest possible unsigned int - 1 (highest position will never be >9) (10-1).
     {
         uint32_t t=temp[i];
         uint32_t r=t%10;
-        temp[i+1]=(t-r)/10;
+        uint32_t n=(t-r)/10;
+        temp[i+1]=n;
         temp[i]=r;
+        if(n==0)
+            break;
     }
     char reachedValueAt=-1;
-    for(char i=31;i>=0;i--)
+    for(char i=9;i>=0;i--) // Amount of decimals in highest possible unsigned int - 1 (highest position will never be >9) (10-1).
     {
-        uint32_t t=temp[i];
+        uint32_t t=temp[(uint8_t)i];
         if(reachedValueAt==-1)
         {
             if(t==0)
@@ -349,41 +517,52 @@ char *text::unsignedIntToString(uint32_t in)
         }
         out[reachedValueAt-i]=(char)48+t; // 48: ASCII 0
     }
+    free(temp);
     if(reachedValueAt==-1)
-        return "0";
+    {
+        free(out);
+        return duplicateString("0");
+    }
     return out;
 }
 
 char *text::unsignedLongToString(uint64_t in)
 {
-    char *out=(char*)calloc(20,1); // 19+1
-    uint64_t *temp=(uint64_t*)calloc(sizeof(uint64_t)*8,sizeof(uint64_t)); // Retrieve a single value for each position.
+    char *out=(char*)calloc(21,1); // Amount of decimals in highest possible unsigned long + zero-terminator (20+1)
+    uint64_t *temp=(uint64_t*)calloc(sizeof(uint64_t)*20,sizeof(uint64_t)); // Retrieve a single value for each position.
     temp[0]=in;
-    for(char i=0;i<64;i++)
+    for(uint8_t i=0;i<19;i++) // Amount of decimals in highest possible unsigned long - 1 (highest position will never be >9) (20-1).
     {
         uint64_t t=temp[i];
         uint64_t r=t%10;
-        temp[i+1]=(t-r)/10;
+        uint64_t n=(t-r)/10;
+        temp[i+1]=n;
         temp[i]=r;
+        if(n==0)
+            break;
     }
     char reachedValueAt=-1;
-    for(char i=63;i>=0;i--)
+    for(char i=19;i>=0;i--) // Amount of decimals in highest possible unsigned long - 1 (highest position will never be >9) (20-1).
     {
-        uint64_t t=temp[i];
+        uint64_t t=temp[(uint8_t)i];
         if(reachedValueAt==-1)
         {
             if(t==0)
                 continue;
             reachedValueAt=i;
         }
-        out[reachedValueAt-i]=(char)48+t; // 48: ASCII & UTF8 0
+        out[reachedValueAt-i]=(char)(48+t); // 48: ASCII & UTF8 0
     }
+    free(temp);
     if(reachedValueAt==-1)
-        return "0";
+    {
+        free(out);
+        return duplicateString("0");
+    }
     return out;
 }
 
-int32_t text::intFromString(char *in)
+int32_t text::intFromString(const char *in)
 {
     int32_t out=0;
     int len=strlen(in);
@@ -398,7 +577,7 @@ int32_t text::intFromString(char *in)
     return out*(n?-1:1);
 }
 
-int64_t text::longFromString(char *in)
+int64_t text::longFromString(const char *in)
 {
     int64_t out=0;
     int len=strlen(in);
@@ -415,13 +594,24 @@ int64_t text::longFromString(char *in)
     return out*(n?-1:1);
 }
 
-char *text::bytesToHexString(char *in, text_t len, bool addSpaces)
+char *text::byteToHexString(const char in, bool terminateString)
 {
-    char *table="0123456789ABCDEF";
+    const char *table="0123456789ABCDEF";
+    char *out=(char*)malloc(2+(terminateString?1:0));
+    out[0]=table[(in&0xF0)>>4];
+    out[1]=table[in&0x0F];
+    if(terminateString)
+        out[2]=0;
+    return out;
+}
+
+char *text::bytesToHexString(const char *in, size_t len, bool addSpaces)
+{
+    const char *table="0123456789ABCDEF";
     char *out=mkstr(len*2+(addSpaces?len-1:0));
-    text_t pos=0;
+    size_t pos=0;
     uint8_t thisChar;
-    for(text_t i=0;i<len;i++)
+    for(size_t i=0;i<len;i++)
     {
         thisChar=(uint8_t)in[i];
         if(addSpaces&&i>0)
@@ -432,16 +622,16 @@ char *text::bytesToHexString(char *in, text_t len, bool addSpaces)
     return out;
 }
 
-char *text::bytesFromHexString(char *in, uint32_t &size)
+char *text::bytesFromHexString(const char *in, size_t &size)
 {
     // Could contain spaces or other irrelevant chars. Use a buffer system.
-    text_t len=strlen(in);
+    size_t len=strlen(in);
     size=0;
     char *out=(char*)malloc(len); // Larger than the max value.
     bool first=true;
     uint8_t next=0;
     char thisChar;
-    for(text_t i=0;i<len;i++)
+    for(size_t i=0;i<len;i++)
     {
         thisChar=in[i];
         if(thisChar=='0')
@@ -644,8 +834,20 @@ char *text::bytesFromHexString(char *in, uint32_t &size)
 
 int32_t text::round(double in)
 {
-    int32_t f=floor(in);
-    return (double)in-f>=0.5?f+1:f;
+    int32_t f=(int32_t)floor(in);
+    return in<0.0?((double)in-f>0.5?f+1:f):((double)in-f>=0.5?f+1:f);
+}
+
+int32_t text::roundf(float in)
+{
+    int32_t f=(int32_t)floor(in);
+    return in<0.0?((float)in-f>0.5f?f+1:f):((float)in-f>=0.5f?f+1:f);
+}
+
+int64_t text::roundl(double in)
+{
+    int64_t f=(int64_t)floorl(in);
+    return in<0.0?((double)in-f>0.5?f+1:f):((double)in-f>=0.5?f+1:f);
 }
 
 double text::roundToPrecision(double in, int32_t precision)
@@ -653,42 +855,47 @@ double text::roundToPrecision(double in, int32_t precision)
     return round(in*pow((double)10,(double)precision))/pow((double)10,(double)precision);
 }
 
-double text::doubleFromString(char *in)
+double text::doubleFromString(const char *in)
 {
     // Only supports a.b
-    text_t dotPos=indexOf(in,".");
+    size_t dotPos=indexOf(in,".");
     if(dotPos==pos_notFound)
         return (double)longFromString(in);
-    int64_t base=longFromString(substr(in,0,dotPos));
+    bool negative=in[0]=='-'; // Needed for cases like -0.5
+    int64_t base=longFromString(substr(in,negative?1:0,dotPos-(negative?1:0)));
     char *fracStr=substr(in,dotPos+1);
     int64_t fraction=longFromString(fracStr);
     int8_t n=base<0?-1:1;
-    return (double)base+((double)fraction/int64Pow(10,strlen(fracStr)))*n;
+    double out=(double)base+((double)fraction/int64Pow(10,strlen(fracStr)))*n;
+    free(fracStr);
+    return out*(negative?-1.0:1.0);
 }
 
-uint32_t text::indexOf(char *haystack, char *needle)
+size_t text::indexOf(const char *haystack, const char *needle)
 {
-    char *pos=strstr(haystack,needle);
+    char *pos=strstr(const_cast<char*>(haystack),const_cast<char*>(needle));
     if(pos==0)
         return pos_notFound;
-    return pos-haystack;
+    size_t out=pos-haystack;
+    return out;
 }
 
-uint32_t text::indexOfFrom(char *haystack, char *needle, uint32_t startFrom)
+size_t text::indexOfFrom(const char *haystack, const char *needle, size_t startFrom)
 {
-    char *pos=strstr(haystack+startFrom,needle);
+    char *pos=strstr(const_cast<char*>(haystack)+startFrom,const_cast<char*>(needle));
     if(pos==0)
         return pos_notFound;
-    return pos-haystack;
+    size_t out=pos-haystack;
+    return out;
 }
 
-text_t text::lastIndexOf(char *haystack, char *needle)
+size_t text::lastIndexOf(const char *haystack, const char *needle)
 {
-    text_t haystackLen=strlen(haystack);
-    text_t needleLen=strlen(needle);
+    size_t haystackLen=strlen(haystack);
+    size_t needleLen=strlen(needle);
     if(needleLen>haystackLen||haystackLen==0)
         return pos_notFound;
-    for(text_t i=haystackLen-needleLen+1;i>0;i--) // Use this because text_t cannot be -1.
+    for(size_t i=haystackLen-needleLen+1;i>0;i--) // Use this because text_t cannot be -1.
     {
         if(strncmp(haystack+i-1/*See above.*/,needle,needleLen)==0)
             return i-1;
@@ -696,13 +903,13 @@ text_t text::lastIndexOf(char *haystack, char *needle)
     return pos_notFound;
 }
 
-text_t text::lastIndexOfTo(char *haystack, char *needle, text_t to)
+size_t text::lastIndexOfTo(const char *haystack, const char *needle, size_t to)
 {
-    text_t haystackLen=strlen(haystack);
-    text_t needleLen=strlen(needle);
+    size_t haystackLen=strlen(haystack);
+    size_t needleLen=strlen(needle);
     if(needleLen>haystackLen||haystackLen==0)
         return pos_notFound;
-    for(text_t i=to+1;i>0;i--) // Use this because text_t cannot be -1.
+    for(size_t i=to+1;i>0;i--) // Use this because text_t cannot be -1.
     {
         if(strncmp(haystack+i-1/*See above.*/,needle,needleLen)==0)
             return i-1;
@@ -710,50 +917,167 @@ text_t text::lastIndexOfTo(char *haystack, char *needle, text_t to)
     return pos_notFound;
 }
 
-char *text::substr(char *str, uint32_t start)
+size_t text::indexOf(const char *haystack, char needle)
+{
+    size_t l=strlen(haystack);
+    for(size_t i=0;i<l;i++)
+    {
+        char chr=haystack[i];
+        if(chr==needle)
+            return i;
+    }
+    return pos_notFound;
+}
+
+size_t text::indexOfFrom(const char *haystack, char needle, size_t startFrom)
+{
+    size_t l=strlen(haystack);
+    for(size_t i=startFrom;i<l;i++)
+    {
+        char chr=haystack[i];
+        if(chr==needle)
+            return i;
+    }
+    return pos_notFound;
+}
+
+size_t text::lastIndexOf(const char *haystack, char needle)
+{
+    size_t l=strlen(haystack);
+    if(l==0)
+        return pos_notFound;
+    for(size_t i=l;i>0;i--) // size_t cannot be negative, thus the value of "i" is real index + 1.
+    {
+        char chr=haystack[i-1]; // See comment above.
+        if(chr==needle)
+            return i-1;
+    }
+    return pos_notFound;
+}
+
+size_t text::lastIndexOfTo(const char *haystack, char needle, size_t to)
+{
+    size_t l=strlen(haystack);
+    if(l==0)
+        return pos_notFound;
+    for(size_t i=to+1;i>0;i--) // size_t cannot be negative, thus the value of "i" is real index + 1.
+    {
+        char chr=haystack[i-1]; // See comment above.
+        if(chr==needle)
+            return i-1;
+    }
+    return pos_notFound;
+}
+
+size_t text::indexOf(const std::vector<std::string> *haystack, std::string needle)
+{
+    size_t haystackLen=haystack->size();
+    for(size_t i=0;i<haystackLen;i++)
+    {
+        if(haystack->at(i)==needle)
+            return i;
+    }
+    return pos_notFound;
+}
+
+size_t text::indexOfFrom(const std::vector<std::string> *haystack, std::string needle, size_t startFrom)
+{
+    size_t haystackLen=haystack->size();
+    for(size_t i=startFrom;i<haystackLen;i++)
+    {
+        if(haystack->at(i)==needle)
+            return i;
+    }
+    return pos_notFound;
+}
+
+size_t text::lastIndexOf(const std::vector<std::string> *haystack, std::string needle)
+{
+    size_t haystackLen=haystack->size();
+    for(size_t i=haystackLen;i>0;i--) // Use this because text_t cannot be -1.
+    {
+        if(haystack->at(i-1/*See above.*/)==needle)
+            return i;
+    }
+    return pos_notFound;
+}
+
+size_t text::lastIndexOfTo(const std::vector<std::string> *haystack, std::string needle, size_t to)
+{
+    for(size_t i=to+1;i>0;i--) // Use this because text_t cannot be -1.
+    {
+        if(haystack->at(i-1/*See above.*/)==needle)
+            return i;
+    }
+    return pos_notFound;
+}
+
+char *text::substr(const char *str, size_t start)
 {
     return substr(str,start,strlen(str)-start);
 }
 
-char *text::substr(char *str, uint32_t start, uint32_t length)
+char *text::substr(const char *str, size_t start, size_t length)
 {
     char *out=mkstr(length);
-    strncpy(out,str+start,length);
+    memcpy(out,str+start,length);
     return out;
 }
 
-char *text::replace(char *str, char *what, char *with)
+char *text::freeAndReturn(char *toFree, char *out)
 {
-    text_t i=0;
-    text_t whatLen=strlen(what);
-    text_t withLen=strlen(with);
-    text_t len;
+    free(toFree);
+    return out;
+}
+
+const char *text::freeAndReturn(char *toFree, const char *out)
+{
+    free(toFree);
+    return out;
+}
+
+std::string text::toStringAndFree(char *str)
+{
+    std::string out=std::string(str);
+    free(str);
+    return out;
+}
+
+char *text::replace(const char *str, const char *what, const char *with)
+{
+    size_t i=0;
+    size_t whatLen=strlen(what);
+    size_t withLen=strlen(with);
+    size_t len=strlen(str);
+    // We need "in" to avoid modifying an immutable string.
+    char *in=duplicateString(str);
 Next:
-    text_t n=indexOfFrom(str,what,i);
+    size_t n=indexOfFrom(in,what,i);
     if(n!=pos_notFound)
     {
-        len=strlen(str);
+        len=strlen(in);
         char *newStr=(char*)mkstr(len-whatLen+withLen);
-        strcat(newStr,substr(str,0,n));
-        strcat(newStr,with);
-        strcat(newStr,substr(str,n+whatLen,len-n-whatLen));
-        str=newStr;
+        memcpy(newStr,in,n);
+        memcpy(newStr+n,with,withLen);
+        memcpy(newStr+n+withLen,in+n+whatLen,len-n-whatLen);
+        free(in);
+        in=newStr;
         i=n+withLen+1;
-        if(i==strlen(str))
+        if(i==strlen(in))
             goto Ret;
         goto Next;
     }
 Ret:
-    return str;
+    return in;
 }
 
-char *text::escape(char *str)
+char *text::escape(const char *str)
 {
-    text_t length=strlen(str);
-    text_t outPos=0;
+    size_t length=strlen(str);
+    size_t outPos=0;
     char *out=(char*)mkstr(length*2); // Max possible size
     char thisChar;
-    for(text_t i=0;i<length;i++)
+    for(size_t i=0;i<length;i++)
     {
         thisChar=str[i];
         if(thisChar=='\'')
@@ -780,20 +1104,20 @@ char *text::escape(char *str)
     return out;
 }
 
-char *text::unescape(char *str)
+char *text::unescape(const char *str)
 {
-    text_t length=strlen(str);
-    text_t outPos=0;
+    size_t length=strlen(str);
+    size_t outPos=0;
     char *out=(char*)mkstr(length); // Max possible size.
     char thisChar;
-    char prevChar;
+    char prevChar=0;
 
     #define TEXT_UNESCAPE_NEXT_ITERATION \
     \
     prevChar=thisChar;\
     continue;
 
-    for(text_t i=0;i<length;i++)
+    for(size_t i=0;i<length;i++)
     {
         thisChar=str[i];
         if(thisChar=='\'')
@@ -831,13 +1155,13 @@ char *text::unescape(char *str)
     return out;
 }
 
-char *text::escapeDoubleQuotationMarks(char *str)
+char *text::escapeDoubleQuotationMarks(const char *str)
 {
-    text_t length=strlen(str);
-    text_t outPos=0;
+    size_t length=strlen(str);
+    size_t outPos=0;
     char *out=(char*)mkstr(length*2); // Max possible size
     char thisChar;
-    for(text_t i=0;i<length;i++)
+    for(size_t i=0;i<length;i++)
     {
         thisChar=str[i];
         if(thisChar=='"')
@@ -858,20 +1182,20 @@ char *text::escapeDoubleQuotationMarks(char *str)
     return out;
 }
 
-char *text::unescapeDoubleQuotationMarks(char *str)
+char *text::unescapeDoubleQuotationMarks(const char *str)
 {
-    text_t length=strlen(str);
-    text_t outPos=0;
+    size_t length=strlen(str);
+    size_t outPos=0;
     char *out=(char*)mkstr(length); // Max possible size.
     char thisChar;
-    char prevChar;
+    char prevChar=0;
 
     #define TEXT_UNESCAPE_NEXT_ITERATION \
     \
     prevChar=thisChar;\
     continue;
 
-    for(text_t i=0;i<length;i++)
+    for(size_t i=0;i<length;i++)
     {
         thisChar=str[i];
         if(thisChar=='"')
@@ -901,13 +1225,65 @@ char *text::unescapeDoubleQuotationMarks(char *str)
     return out;
 }
 
-char *text::escapeSingleQuotationMarks(char *str)
+char *text::unescapeDoubleQuotationMarksUntilEnd(const char *str, bool excludeFirst)
 {
-    text_t length=strlen(str);
-    text_t outPos=0;
+    size_t length=strlen(str);
+    size_t outPos=0;
+    char *out=(char*)mkstr(length); // Max possible size.
+    char thisChar;
+    char prevChar=0;
+    bool nonWhitespacePassed=false;
+
+    #define TEXT_UNESCAPE_NEXT_ITERATION \
+    \
+    prevChar=thisChar;\
+    continue;
+
+    for(size_t i=0;i<length;i++)
+    {
+        thisChar=str[i];
+        if(thisChar=='"')
+        {
+            if(prevChar=='\\')
+            {
+                out[outPos-1]=thisChar; // No ++ here.
+                TEXT_UNESCAPE_NEXT_ITERATION;
+            }
+            // Reached valid closing "
+            if(!nonWhitespacePassed&&excludeFirst)
+                continue;
+            out[outPos]=0;
+            return out;
+        }
+        else if(thisChar=='\\')
+        {
+            if(prevChar=='\\')
+            {
+                prevChar=0;
+                continue; // Not TEXT_UNESCAPE_NEXT_ITERATION, we want to avoid errors if: \\"
+            }
+        }
+        if(!nonWhitespacePassed&&!isWhitespace(thisChar))
+            nonWhitespacePassed=true;
+
+        out[outPos++]=thisChar;
+        TEXT_UNESCAPE_NEXT_ITERATION;
+    }
+
+    out[outPos]=0; // Terminate the string.
+
+    #undef TEXT_UNESCAPE_NEXT_ITERATION
+
+    return out;
+}
+
+char *text::escapeSingleQuotationMarks(const char *str)
+{
+    size_t length=strlen(str);
+    size_t outPos=0;
     char *out=(char*)mkstr(length*2); // Max possible size
     char thisChar;
-    for(text_t i=0;i<length;i++)
+    for(size_t i=0;i<length;i++)
     {
         thisChar=str[i];
         if(thisChar=='\'')
@@ -929,20 +1305,20 @@ char *text::escapeSingleQuotationMarks(char *str)
 
 }
 
-char *text::unescapeSingleQuotationMarks(char *str)
+char *text::unescapeSingleQuotationMarks(const char *str)
 {
-    text_t length=strlen(str);
-    text_t outPos=0;
+    size_t length=strlen(str);
+    size_t outPos=0;
     char *out=(char*)mkstr(length); // Max possible size.
     char thisChar;
-    char prevChar;
+    char prevChar=0;
 
     #define TEXT_UNESCAPE_NEXT_ITERATION \
     \
     prevChar=thisChar;\
     continue;
 
-    for(text_t i=0;i<length;i++)
+    for(size_t i=0;i<length;i++)
     {
         thisChar=str[i];
         if(thisChar=='\'')
@@ -958,7 +1334,7 @@ char *text::unescapeSingleQuotationMarks(char *str)
             if(prevChar=='\\')
             {
                 prevChar=0;
-                continue; // Not TEXT_UNESCAPE_NEXT_ITERATION, we want to avoid errors if: \\"
+                continue; // Not TEXT_UNESCAPE_NEXT_ITERATION, we want to avoid errors if: \\'
             }
         }
         out[outPos++]=thisChar;
@@ -972,31 +1348,119 @@ char *text::unescapeSingleQuotationMarks(char *str)
     return out;
 }
 
-std::vector<char *> text::split(char *in, char *separator)
+char *text::unescapeSingleQuotationMarksUntilEnd(const char *str, bool excludeFirst)
+{
+    size_t length=strlen(str);
+    size_t outPos=0;
+    char *out=(char*)mkstr(length); // Max possible size.
+    char thisChar;
+    char prevChar=0;
+    bool nonWhitespacePassed=false;
+
+    #define TEXT_UNESCAPE_NEXT_ITERATION \
+    \
+    prevChar=thisChar;\
+    continue;
+
+    for(size_t i=0;i<length;i++)
+    {
+        thisChar=str[i];
+        if(thisChar=='\'')
+        {
+            if(prevChar=='\\')
+            {
+                out[outPos-1]=thisChar; // No ++ here.
+                TEXT_UNESCAPE_NEXT_ITERATION;
+            }
+            // Reached valid closing '
+            if(!nonWhitespacePassed&&excludeFirst)
+                continue;
+            out[outPos]=0;
+            return out;
+        }
+        else if(thisChar=='\\')
+        {
+            if(prevChar=='\\')
+            {
+                prevChar=0;
+                continue; // Not TEXT_UNESCAPE_NEXT_ITERATION, we want to avoid errors if: \\'
+            }
+        }
+        if(!nonWhitespacePassed&&!isWhitespace(thisChar))
+            nonWhitespacePassed=true;
+
+        out[outPos++]=thisChar;
+        TEXT_UNESCAPE_NEXT_ITERATION;
+    }
+
+    out[outPos]=0; // Terminate the string.
+
+    #undef TEXT_UNESCAPE_NEXT_ITERATION
+
+    return out;
+}
+
+std::vector<char *> text::split(const char *in, const char *separator)
 {
     std::vector<char*> out;
-    text_t separatorLen=strlen(separator);
-    char *from=in;
+    size_t separatorLen=strlen(separator);
+    size_t len=strlen(in);
+    if(len==0)
+        return std::vector<char*>();
+    char *from=duplicateString(in);
     char *next;
     char *last=0;
     while((next=strstr(from,separator))!=0)
     {
-        out.push_back(substr(from,0,next-from));
+        out.push_back(substr(from,0,next-from)); // Text before separator
         from=next+separatorLen;
         if(from[0]==0)
+        {
+            // Reached end of string.
             return out;
-        last=next;
+        }
+        last=from;
     }
-    if(last!=0) // Push last item
-        out.push_back(substr(last+separatorLen,0,in+strlen(in)-last-separatorLen));
+    if(last!=0) // Push last item. If we reach this, it means there is still an item at the end.
+        out.push_back(duplicateString(last));
+    else if(out.size()==0)
+        out.push_back(duplicateString(in));
     return out;
 }
 
-text_t text::count(char *haystack, char *needle)
+std::vector<std::string> text::splitToStringArray(const char *in, const char *separator)
 {
-    text_t out=0;
-    text_t needleLen=strlen(needle);
-    char *from=haystack;
+    std::vector<std::string> out;
+    size_t separatorLen=strlen(separator);
+    size_t len=strlen(in);
+    if(len==0)
+        return std::vector<std::string>();
+    char *from=duplicateString(in);
+    char *next;
+    char *last=0;
+    while((next=strstr(from,separator))!=0)
+    {
+        out.push_back(toStringAndFree(substr(from,0,next-from))); // Text before separator
+        from=next+separatorLen;
+        if(from[0]==0)
+        {
+            // Reached end of string.
+            return out;
+        }
+        last=from;
+    }
+    if(last!=0) // Push last item. If we reach this, it means there is still an item at the end.
+        out.push_back(std::string(last));
+    else if(out.size()==0)
+        out.push_back(std::string(in));
+    return out;
+}
+
+size_t text::count(const char *haystack, const char *needle)
+{
+    size_t out=0;
+    size_t needleLen=strlen(needle);
+    char *from=duplicateString(haystack);
     char *next;
     while((next=strstr(from,needle))!=0)
     {
@@ -1008,64 +1472,164 @@ text_t text::count(char *haystack, char *needle)
     return out; // This is never reached.
 }
 
-char *text::trimStart(char *in)
+size_t text::count(const char *haystack, char needle)
 {
-    text_t trimStart=0;
-    while(isWhitespace(in[trimStart])) // (char)0 is not a whitespace char.
+    size_t out=0;
+    size_t len=strlen(haystack);
+    for(size_t i=0;i<len;i++)
+    {
+        if(haystack[i]==needle)
+            out++;
+    }
+    return out;
+}
+
+size_t text::countUnique(const char *haystack)
+{
+    std::string found;
+    size_t count=0;
+    size_t len=strlen(haystack);
+    for(size_t i=0;i<len;i++)
+    {
+        char thisChar=haystack[i];
+        if(found.find(thisChar)==std::string::npos)
+        {
+           count++;
+           found.append(1,thisChar);
+        }
+    }
+    return count;
+}
+
+size_t text::countUnique(std::vector<std::string> haystack)
+{
+    size_t count=0;
+    std::vector<std::string> found;
+    for(size_t i=0;i<haystack.size();i++)
+    {
+        std::string thisStr=haystack.at(i);
+        if(indexOf(&found,thisStr)==pos_notFound)
+        {
+            count++;
+            found.push_back(thisStr);
+        }
+    }
+    return count;
+}
+
+char *text::trimStart(const char *str)
+{
+    size_t trimStart=0;
+    size_t inLen=strlen(str);
+    while(trimStart<inLen&&isWhitespace(str[trimStart])) // (char)0 is not a whitespace char.
         trimStart++;
-    return substr(in,trimStart);
+    if(trimStart==inLen)
+        return duplicateString("");
+    return substr(str,trimStart);
 }
 
-char *text::trimEnd(char *in)
+char *text::trimEnd(const char *str)
 {
-    text_t trimEnd=0;
-    text_t inLen=strlen(in);
-    while(isWhitespace(in[inLen-trimEnd-1])) // (char)0 is not a whitespace char.
+    size_t trimEnd=0;
+    size_t inLen=strlen(str);
+    while(trimEnd<inLen&&isWhitespace(str[inLen-trimEnd-1])) // (char)0 is not a whitespace char.
         trimEnd++;
-    return substr(in,0,inLen-trimEnd);
+    if(trimEnd==inLen)
+        return duplicateString("");
+    return substr(str,0,inLen-trimEnd);
 }
 
-char *text::trim(char *in)
+char *text::trim(const char *str)
 {
-    text_t trimStart=0;
-    text_t trimEnd=0;
-    text_t inLen=strlen(in);
+    size_t trimStart=0;
+    size_t trimEnd=0;
+    size_t inLen=strlen(str);
     if(inLen==0)
-        return in;
-    while(isWhitespace(in[trimStart])) // (char)0 is not a whitespace char.
+        return duplicateString(str);
+    while(trimStart<inLen&&isWhitespace(str[trimStart])) // (char)0 is not a whitespace char.
         trimStart++;
-    while(isWhitespace(in[inLen-trimEnd-1])) // (char)0 is not a whitespace char.
+    while(trimEnd<inLen&&isWhitespace(str[inLen-trimEnd-1])) // (char)0 is not a whitespace char.
         trimEnd++;
-    return substr(in,trimStart,inLen-trimStart-trimEnd);
+    if(trimStart==inLen)
+        return duplicateString("");
+    return substr(str,trimStart,inLen-trimStart-trimEnd);
 }
 
-char *text::firstChars(char *in, uint32_t chars)
+char *text::firstChars(const char *in, size_t chars)
 {
     char *out=(char*)mkstr(chars);
-    strncpy(out,in,chars);
+    memcpy(out,in,chars);
     return out;
 }
 
-char *text::lastChars(char *in, text_t chars)
+char *text::lastChars(const char *in, size_t chars)
 {
     char *out=(char*)mkstr(chars);
-    text_t len=strlen(in);
-    strcpy(out,in+len-chars);
+    size_t len=strlen(in);
+    memcpy(out,in+len-chars,chars);
     return out;
 }
 
-wchar_t *text::wFirstChars(wchar_t *in, text_t chars)
+std::string text::trimStart(std::string str)
+{
+    size_t trimStart=0;
+    size_t inLen=str.length();
+    while(trimStart<inLen&&isWhitespace(str[trimStart])) // (char)0 is not a whitespace char.
+        trimStart++;
+    if(trimStart==str.length())
+        return std::string("");
+    return str.substr(trimStart);
+}
+
+std::string text::trimEnd(std::string str)
+{
+    size_t trimEnd=0;
+    size_t inLen=str.length();
+    while(trimEnd<inLen&&isWhitespace(str[inLen-trimEnd-1])) // (char)0 is not a whitespace char.
+        trimEnd++;
+    if(trimEnd==inLen)
+        return std::string("");
+    return str.substr(0,inLen-trimEnd);
+}
+
+std::string text::trim(std::string str)
+{
+    size_t trimStart=0;
+    size_t trimEnd=0;
+    size_t inLen=str.length();
+    if(inLen==0)
+        return std::string("");
+    while(trimStart<inLen&&isWhitespace(str[trimStart])) // (char)0 is not a whitespace char.
+        trimStart++;
+    while(trimEnd<inLen&&isWhitespace(str[inLen-trimEnd-1])) // (char)0 is not a whitespace char.
+        trimEnd++;
+    if(trimStart==inLen)
+        return std::string("");
+    return str.substr(trimStart,inLen-trimStart-trimEnd);
+}
+
+std::string text::firstChars(std::string in, size_t chars)
+{
+    return in.substr(0,chars);
+}
+
+std::string text::lastChars(std::string in, size_t chars)
+{
+    return in.substr(in.length()-chars);
+}
+
+wchar_t *text::wFirstChars(const wchar_t *in, size_t chars)
 {
     wchar_t *out=mkwstr(chars);
-    wcsncpy(out,in,chars);
+    memcpy(out,in,chars*sizeof(wchar_t));
     return out;
 }
 
-wchar_t *text::wLastChars(wchar_t *in, uint32_t chars)
+wchar_t *text::wLastChars(const wchar_t *in, size_t chars)
 {
     wchar_t *out=mkwstr(chars);
-    text_t len=wcslen(in);
-    wcscpy(out,in+len-chars);
+    size_t len=wcslen(in);
+    memcpy(out,in+len-chars,chars*sizeof(wchar_t));
     return out;
 }
 
@@ -1078,40 +1642,147 @@ bool text::isWhitespace(char chr)
             ;
 }
 
-bool text::startsWith(char *str, char *with)
+char *text::strToUpper(const char *str)
 {
-    text_t strLen=strlen(str);
-    text_t withLen=strlen(with);
-    if(withLen>strLen||withLen==0)
-        return false;
-    return strcmp(substr(str,0,withLen),with)==0;
+    size_t len=strlen(str);
+    char *out=(char*)malloc(len+1);
+    out[len]=0;
+    for(size_t i=0;i<len;i++)
+        out[i]=toupper(str[i]);
+    return out;
 }
 
-bool text::endsWith(char *str, char *with)
+char *text::strToLower(const char *str)
 {
-    text_t strLen=strlen(str);
-    text_t withLen=strlen(with);
-    if(withLen>strLen||withLen==0)
-        return false;
-    return strcmp(substr(str,strLen-withLen),with)==0;
+    size_t len=strlen(str);
+    char *out=(char*)malloc(len+1);
+    out[len]=0;
+    for(size_t i=0;i<len;i++)
+        out[i]=tolower(str[i]);
+    return out;
 }
 
-bool text::iStartsWith(char *str, char *with)
+std::string text::strToUpper(std::string str)
 {
-    text_t strLen=strlen(str);
-    text_t withLen=strlen(with);
-    if(withLen>strLen||withLen==0)
-        return false;
-    return stricmp(substr(str,0,withLen),with)==0;
+    size_t len=str.length();
+    std::string out=std::string(len,0);
+    for(size_t i=0;i<len;i++)
+        out.at(i)=toupper(str.at(i));
+    return out;
 }
 
-bool text::iEndsWith(char *str, char *with)
+std::string text::strToLower(std::string str)
 {
-    text_t strLen=strlen(str);
-    text_t withLen=strlen(with);
+    size_t len=str.length();
+    std::string out=std::string(len,0);
+    for(size_t i=0;i<len;i++)
+        out.at(i)=tolower(str.at(i));
+    return out;
+}
+
+bool text::iCompare(std::string strA, std::string strB)
+{
+    return strToLower(strA)==strToLower(strB);
+}
+
+bool text::iCompare(const char *strA, const char *strB)
+{
+    size_t aLen=strlen(strA);
+    size_t bLen=strlen(strB);
+    if(aLen!=bLen)
+        return false;
+    for(size_t i=0;i<aLen;i++)
+    {
+        char aChar=strA[i];
+        char bChar=strB[i];
+        if(tolower(aChar)!=tolower(bChar))
+            return false;
+    }
+    return true;
+}
+
+bool text::startsWith(const char *str, const char *with)
+{
+    size_t strLen=strlen(str);
+    size_t withLen=strlen(with);
     if(withLen>strLen||withLen==0)
         return false;
-    return stricmp(substr(str,strLen-withLen),with)==0;
+    char *cmp=substr(str,0,withLen);
+    bool out=strcmp(cmp,with)==0;
+    free(cmp);
+    return out;
+}
+
+bool text::endsWith(const char *str, const char *with)
+{
+    size_t strLen=strlen(str);
+    size_t withLen=strlen(with);
+    if(withLen>strLen||withLen==0)
+        return false;
+    char *cmp=substr(str,strLen-withLen);
+    bool out=strcmp(cmp,with)==0;
+    free(cmp);
+    return out;
+}
+
+bool text::iStartsWith(const char *str, const char *with)
+{
+    size_t strLen=strlen(str);
+    size_t withLen=strlen(with);
+    if(withLen>strLen||withLen==0)
+        return false;
+    char *cmp=substr(str,0,withLen);
+    bool out=iCompare(cmp,with);
+    free(cmp);
+    return out;
+}
+
+bool text::iEndsWith(const char *str, const char *with)
+{
+    size_t strLen=strlen(str);
+    size_t withLen=strlen(with);
+    if(withLen>strLen||withLen==0)
+        return false;
+    char *cmp=substr(str,strLen-withLen);
+    bool out=iCompare(cmp,with);
+    free(cmp);
+    return out;
+}
+
+bool text::startsWith(std::string str, std::string with)
+{
+    size_t strLen=str.length();
+    size_t withLen=with.length();
+    if(withLen>strLen||withLen==0)
+        return false;
+    return str.substr(0,withLen)==with;
+}
+
+bool text::endsWith(std::string str, std::string with)
+{
+    size_t strLen=str.length();
+    size_t withLen=with.length();
+    if(withLen>strLen||withLen==0)
+        return false;
+    return str.substr(strLen-withLen)==with;
+}
+
+bool text::iStartsWith(std::string str, std::string with)
+{
+    size_t strLen=str.length();
+    size_t withLen=with.length();
+    if(withLen>strLen||withLen==0)
+        return false;
+    return iCompare(str.substr(0,withLen),with);
+}
+
+bool text::iEndsWith(std::string str, std::string with)
+{
+    size_t strLen=str.length();
+    size_t withLen=with.length();
+    if(withLen>strLen||withLen==0)
+        return false;
+    return iCompare(str.substr(strLen-withLen),with);
 }
 
 char *text::charToString(char in)
@@ -1121,54 +1792,298 @@ char *text::charToString(char in)
     return out;
 }
 
-char *text::getDirPath(char *path)
+char *text::getDirPath(const char *path)
 {
-    if(indexOf(path,"/")!=pos_notFound)
-        path=replace(path,"/","\\");
-    text_t len=strlen(path);
-    if(path[len-1]=='\\')
+    char *nPath=duplicateString(path);
+    if(indexOf(nPath,"/")!=pos_notFound)
+    {
+        char *nnPath=replace(nPath,"/","\\");
+        free(nPath);
+        nPath=nnPath;
+    }
+    size_t len=strlen(nPath);
+    if(nPath[len-1]=='\\')
     {
         if(len==1)
-            return path;
+            return duplicateString(nPath);
         len--;
     }
-    text_t pos=lastIndexOfTo(path,"\\",len-1);
+    size_t pos=lastIndexOfTo(nPath,"\\",len-1);
     if(pos==pos_notFound)
-        return path;
-    return substr(path,0,pos+1);
+        return duplicateString(nPath);
+    return freeAndReturn(nPath,substr(nPath,0,pos+1));
 }
 
-char *text::getFileName(char *filePath)
+char *text::getFileName(const char *filePath)
 {
-    if(indexOf(filePath,"/")!=pos_notFound)
-        filePath=replace(filePath,"/","\\");
-    text_t pos=lastIndexOf(filePath,"\\");
-    return substr(filePath,pos+1,strlen(filePath)-pos-1);
+    char *nFilePath=duplicateString(filePath);
+    if(indexOf(nFilePath,"/")!=pos_notFound)
+    {
+        char *nnFilePath=replace(nFilePath,"/","\\");
+        free(nFilePath);
+        nFilePath=nnFilePath;
+    }
+    size_t pos=lastIndexOf(nFilePath,"\\");
+    return freeAndReturn(nFilePath,substr(nFilePath,pos+1,strlen(nFilePath)-pos-1));
 }
 
-char *text::getFileExtension(char *filePath)
+char *text::getFileExtension(const char *filePath)
 {
-    if(indexOf(filePath,"/")!=pos_notFound)
-        filePath=replace(filePath,"/","\\");
-    text_t pos=lastIndexOf(filePath,".");
+    char *nFilePath=duplicateString(filePath);
+    if(indexOf(nFilePath,"/")!=pos_notFound)
+    {
+        char *nnFilePath=replace(nFilePath,"/","\\");
+        free(nFilePath);
+        nFilePath=nnFilePath;
+    }
+    size_t pos=lastIndexOf(nFilePath,".");
     if(pos==pos_notFound)
-        return "";
-    return substr(filePath,pos+1,strlen(filePath)-pos-1);
+        return freeAndReturn(nFilePath,duplicateString(""));
+    return freeAndReturn(nFilePath,substr(nFilePath,pos+1,strlen(nFilePath)-pos-1));
 }
 
-char *text::getFileNameWithoutExtension(char *filePath)
+char *text::getFileNameWithoutExtension(const char *filePath)
 {
-    if(indexOf(filePath,"/")!=pos_notFound)
-        filePath=replace(filePath,"/","\\");
-    text_t pos=lastIndexOf(filePath,"\\");
-    text_t pos2=lastIndexOf(filePath,".");
+    char *nFilePath=duplicateString(filePath);
+    if(indexOf(nFilePath,"/")!=pos_notFound)
+    {
+        char *nnFilePath=replace(nFilePath,"/","\\");
+        free(nFilePath);
+        nFilePath=nnFilePath;
+    }
+    size_t pos=lastIndexOf(nFilePath,"\\");
+    size_t pos2=lastIndexOf(nFilePath,".");
     if(pos2==pos_notFound)
     {
         if(pos==pos_notFound)
-            return filePath;
-        return substr(filePath,pos+1,strlen(filePath)-pos-1);
+            return nFilePath;
+        return substr(nFilePath,pos+1,strlen(nFilePath)-pos-1);
     }
     if(pos==pos_notFound)
-        return substr(filePath,0,pos2);
-    return substr(filePath,pos+1,pos2-pos-1);
+        return substr(nFilePath,0,pos2);
+    return substr(nFilePath,pos+1,pos2-pos-1);
+}
+
+std::vector<char *> text::stringVectorToCharPtrVector(std::vector<std::string> in)
+{
+   std::vector<char *> out=std::vector<char *>();
+   size_t size=in.size();
+   for(size_t i=0;i<size;i++)
+       out.push_back(duplicateString(in.at(i).c_str()));
+   return out;
+}
+
+std::vector<std::string> text::charPtrVectorToStringVector(std::vector<char *> in, bool freeCharPtrs)
+{
+    std::vector<std::string> out=std::vector<std::string>();
+    size_t size=in.size();
+    if(freeCharPtrs)
+    {
+        for(size_t i=0;i<size;i++)
+        {
+            char *ptr=in.at(i);
+            out.push_back(std::string(ptr));
+            free(ptr);
+        }
+    }
+    else
+    {
+        for(size_t i=0;i<size;i++)
+            out.push_back(std::string(in.at(i)));
+    }
+    return out;
+}
+
+void text::removeEmptyEntries(std::vector<std::string> *in, bool removeWhitespaceOnlyEntries)
+{
+    if(removeWhitespaceOnlyEntries)
+    {
+        size_t pos=0;
+        while(pos<in->size())
+        {
+            if(trim(in->at(pos)).length()==0)
+                in->erase(in->begin()+pos);
+            else
+                pos++;
+        }
+    }
+    else
+    {
+        size_t pos=0;
+        while(pos<in->size())
+        {
+            if(in->at(pos).length()==0)
+                in->erase(in->begin()+pos);
+            else
+                pos++;
+        }
+    }
+}
+
+bool text::matchWildcard(const char *str, const char *pattern, bool ignoreCase, bool allowBackslashEscape, char anyCharsSymbol, char anyCharSymbol)
+{
+    if(ignoreCase)
+    {
+        str=strToLower(str);
+        pattern=strToLower(pattern);
+    }
+    // Split pattern into parts
+    std::vector<std::string> parts;
+    size_t strLength=strlen(str);
+    size_t patternLength=strlen(pattern);
+    bool nextEscape=false;
+    std::string nextStr=std::string("T");
+    for(size_t i=0;i<patternLength;i++)
+    {
+        char chr=pattern[i];
+        if(nextEscape)
+        {
+            nextStr+=chr;
+            nextEscape=false;
+            continue;
+        }
+        if(chr=='\\'&&allowBackslashEscape)
+        {
+            nextEscape=true;
+            continue;
+        }
+        if(chr==anyCharsSymbol)
+        {
+            if(nextStr.length()>1) // All text parts start with "T"
+            {
+                parts.push_back(std::string(nextStr));
+                nextStr=std::string("T"); // Text
+            }
+            parts.push_back("*");
+        }
+        else if(chr==anyCharSymbol)
+        {
+            if(nextStr.length()>1) // All text parts start with "T"
+            {
+                parts.push_back(std::string(nextStr));
+                nextStr=std::string("T"); // Text
+            }
+            parts.push_back("?");
+        }
+        else
+            nextStr+=chr;
+    }
+    if(nextStr.length()>1) // All text parts start with "T"
+        parts.push_back(std::string(nextStr));
+
+    // Now that we have the parts, match them against the string
+
+    bool result=true;
+    std::string nStr=std::string(str);
+    size_t remainingLength=strLength;
+    size_t startPos=0;
+    size_t partCount=parts.size();
+    for(size_t i=0;i<partCount;i++)
+    {
+        std::string part=parts.at(i);
+        size_t partLength=part.length()-1;
+        bool isText=part[0]=='T';
+        bool isAnyChars=part[0]=='*';
+        bool isAnyChar=part[0]=='?';
+
+        if(isText)
+        {
+            if(partLength>remainingLength)
+            {
+                result=false;
+                goto Ret;
+            }
+            if(nStr.substr(startPos,partLength).compare(part.substr(1))!=0)
+            {
+                result=false;
+                goto Ret;
+            }
+            remainingLength-=partLength;
+            startPos+=partLength;
+        }
+        else if(isAnyChar)
+        {
+            // Exactly one character
+            if(remainingLength==0)
+            {
+                result=false;
+                goto Ret;
+            }
+            remainingLength--;
+            startPos++;
+        }
+        else if(isAnyChars)
+        {
+            // 0-n characters
+            // Strategy: try to find the next part that has a definite meaning
+            if(i==partCount-1) // If this is the last part of the pattern
+                goto Ret;
+
+            std::string nextPart;
+            size_t nextPartLength;
+            i++;
+            for(;i<partCount;i++)
+            {
+                nextPart=parts.at(i);
+                nextPartLength=nextPart.length()-1;
+                if(nextPart[0]=='*') // **, ***, etc. are all equivalent to *
+                {
+                    if(i==partCount-1)
+                        goto Ret;
+                    continue;
+                }
+                else if(nextPart[0]=='?')
+                {
+                    if(remainingLength==0)
+                    {
+                        result=false;
+                        goto Ret;
+                    }
+                    remainingLength--;
+                    startPos++;
+                }
+                else // if(nextPart[0]=='T')
+                {
+                    if(nextPartLength>remainingLength)
+                    {
+                        result=false;
+                        goto Ret;
+                    }
+                    // Try to find text
+                    nextPart=nextPart.substr(1); // Remove "T" from beginning
+                    bool foundMatch=false;
+                    for(size_t offset=0;nextPartLength+offset<=remainingLength;offset++)
+                    {
+                        if(nStr.substr(startPos+offset,nextPartLength).compare(nextPart/*String trimmed above*/)==0)
+                        {
+                            startPos+=offset+nextPartLength;
+                            remainingLength-=offset+nextPartLength;
+                            foundMatch=true;
+                            break;
+                        }
+                    }
+                    if(foundMatch)
+                        break;
+                    result=false;
+                    goto Ret;
+                }
+            }
+        }
+    }
+    if(remainingLength>0)
+        result=false;
+    Ret:
+    if(ignoreCase)
+    {
+        free(const_cast<char*>(str));
+        free(const_cast<char*>(pattern));
+    }
+    return result;
+}
+
+void text::freeCharArrayVectorContents(std::vector<char *> vector)
+{
+    size_t size=vector.size();
+    for(size_t i=0;i<size;i++)
+        free(vector.at(i));
 }
